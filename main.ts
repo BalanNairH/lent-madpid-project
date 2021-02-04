@@ -1,14 +1,49 @@
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    info.changeScoreBy(-1)
-    music.baDing.play()
-})
+namespace SpriteKind {
+    export const dispenser = SpriteKind.create()
+    export const OBJECT = SpriteKind.create()
+}
+let DOOR = sprites.create(img`
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ffffffffffffff..................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    ................................
+    `, SpriteKind.OBJECT)
+DOOR.setPosition(93, 120)
 let invisible = sprites.create(img`
-    11111111111111111111111111111111111111111111111111
-    11111111111111111111111111111111111111111111111111
-    11111111111111111111111111111111111111111111111111
-    11111111111111111111111111111111111111111111111111
-    11111111111111111111111111111111111111111111111111
-    11111111111111111111111111111111111111111111111111
+    1111111111111111111111111111111111111111111.......
+    1111111111111111111111111111111111111111111.......
+    1111111111111111111111111111111111111111111.......
+    1111111111111111111111111111111111111111111.......
+    1111111111111111111111111111111111111111111.......
+    1111111111111111111111111111111111111111111.......
     11111111111111111111111111111111111111111111111111
     11111111111111111111111111111111111111111111111111
     11111111111111111111111111111111111111111111111111
@@ -40,7 +75,27 @@ let invisible = sprites.create(img`
     11111111111111111111111111111111111111111111111111
     `, SpriteKind.Enemy)
 invisible.setPosition(90, 72)
-let Donald_Duck = sprites.create(img`
+let Trump_dispenser = sprites.create(img`
+    c c c c c c e e 2 2 2 2 4 2 e e 
+    c c c c c c e e 2 2 2 4 2 2 e e 
+    . c c c c e e 2 2 2 2 4 2 e e . 
+    . . c f f f c c e e f f e e . . 
+    . . . . e e 2 2 2 4 e e . . . . 
+    . . . . . c c c e e e . . . . . 
+    . . . . . . e 2 4 e . . . . . . 
+    . . . . . . e e 4 e . . . . . . 
+    . . . . . . . e 2 . . . . . . . 
+    . . . . . . . f f . . . . . . . 
+    . . . . . . . c 2 . . . . . . . 
+    . . . . . . . f f . . . . . . . 
+    . . . . . . . c b . . . . . . . 
+    . . . . . . . c d . . . . . . . 
+    . . . . . . . c d . . . . . . . 
+    . . . . . . . c d . . . . . . . 
+    `, SpriteKind.dispenser)
+Trump_dispenser.setPosition(82, 0)
+controller.moveSprite(Trump_dispenser, 100, 100)
+let Trump = sprites.createProjectileFromSprite(img`
     2 2 2 . . . . . . . . . 2 2 2 2 
     2 2 2 5 5 5 5 5 5 5 . 2 2 2 2 2 
     . 2 2 5 5 5 5 5 5 5 5 5 2 2 . . 
@@ -57,8 +112,7 @@ let Donald_Duck = sprites.create(img`
     . . . . . . . 4 4 4 4 . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Projectile)
-controller.moveSprite(Donald_Duck, 100, 100)
+    `, Trump_dispenser, 0, 100)
 info.setScore(0)
 scene.setBackgroundImage(img`
     ..................................................................................................88fff...2222222...............................................
@@ -136,7 +190,7 @@ scene.setBackgroundImage(img`
     1111111..ffffffdddddd.ffffffddddddffff.dddddfffff.ddddd.ffff111111fffffffffffffff11ffffffffffffffff11111fffff11111fffdddddffff.dddddfffffdddddfffff.dddddfffff11
     1111111.fffffffddddddffffffdddddddffff.dddddfffff.ddddd.ffff111111ffffff111111111111111111111111111111111111111111fffdddddffff.dddddfffffdddddfffff.dddddfffff11
     1111111.fffffffddddddfffffddddddddffff.ddddddffff.dddddffff1111111111111111111111111111111111111111111111111111111fffdddddffff.dddddfffffdddddfffff.dddddfffff11
-    11111111ffffffdddddddfffffddddddddffff.ddddddffff.dddddffff111111111111111111111111111.11111111111111111111111111ffffddddddfff.dddddfffffdddddfffff.dddddfffff11
+    11111111ffffffdddddddfffffddddddddffff.ddddddffff.dddddffff111111111111111111111111111.11111111111111111111311111ffffddddddfff.dddddfffffdddddfffff.dddddfffff11
     11111111ffffffdddddddffffdddddddddffff.ddddddffff.dddddffff11111111111111111111111111111111111111111111111111111.ffffddddddfff.dddddffff.dddddfffff.dddddfffff11
     11111111ffffffddddddfffffddddddddfffff..dddddffff.dddddffff11111111111111111111111111111111111111111111111111111.ffffddddddfff.dddddffff.dddddfffff.dddddfffff11
     11111111fffffdddddddfffffdddddddddffff..dddddffff.dddddffff11111111111111111111111111111111111111111111111111111fffffdddddddff.dddddffff.dddddfffff.dddddfffff11
@@ -159,26 +213,26 @@ scene.setBackgroundImage(img`
     11111111ffffdddddddfffff.ddddddfffffff.ddddddffddddddfffff111111111111111111111111111111111111111111111111111111111fff.dddddfffddddddfffdddddfffff..dddddffff111
     11111111ffffdddddddffffff.dddddffffffffddddddffddddddfffff111111111111111111111111111111111111111111111111111111111fffddddddfffddddddfffdddddfffff..dddddffff111
     11111111ffffddddddfffffff.ddddd.fffffffddddddffddddd.fffff111111111111111111111111111111111111111111111111111111111fffddddddfffddddddfffdddddffffff.dddddffff111
-    1111111fffffddddddfffffff.ddddd.fffffffdddddfffddddd.ffff111111111111111111111111fffffffffff11111111111111111111111ffdddddddfffddddddfffdddddffffff.dddddfffff11
-    1111111fffffddddd..ffffff.ddddd..ffffffddddddffddddd.ffff111111111111111111111ffffffffffffff11111111111111111111111ffdddddddfffddddddfffddddddfffff.dddddfffff11
-    1111111fffffddddd..fffffffdddddd.ffffffddddddffddddd.ffff111111111111111111111fffffffffffffff1111111111111111111111ffdddddddfffdddddffffddddddfffff.dddddfffff11
-    1111111ffff.ddddddddddffffddddddd.fffffddddddffddddddffff111111111111111111111fffffffffffffff1111111111111111111111ffddddddffffdddddffffddddddfffff.dddddfffff11
-    1111111ffffdddddddddddffffddddddd.fffffddddddffddddddffff111111111111111111111fffffffffffffff1111111111111111111111fdddddddffffdddddffffddddddfffff.dddddfffff11
-    1111111ffffdddddddddddffffddddddd.fffffddddddffddddddffff111111111111111111111fffffffffffffff1111111111111111111111fddddddfffffddddddffffdddddfffff.dddddffff111
-    .111111ffffdddddddddddffffddddddd.ffffffdddddffddddddffff111111111111111111111fffffffffffffff1111111111111111111111fddddddfffffddddddffffdddddfffff.dddddffff111
-    1111111ffffdddddddddddfffffdddddd.ffffffdddddffdddddddfff111111111111111111111fffffffffffffff111111111111111111111ffddddddfffffddddddffffdddddfffff.ddddddfff111
-    1111111ffffdddddddddddffffffddddd.fffffddddddfffddddddfff111111111111111111111fffffffffffffff111111111111111111111ffddddddfffffddddddffffdddddfffff.ddddddfff111
-    1111111ffffddddddddddfffffffddddd.fffffddddddfffdddddddfff11111111111111111111fffffffffffffff111111111111111111111ffddddd.ffffffdddddffffdddddfffff.ddddddfff111
-    1111111ffffddddddddddddfffffddddddffffdddddddfffdddddddfff11111111111111111111fffffffffffffff111111111111111111111f1111d11ffffff...1.fffff....ff11111dddddfff111
-    1111111ffffddddddddddddfffffddddddffffdddddddffffddddddfff11111111111111111111fffffffffffffff111111111111111111111111111111111111111111111111111111111111dfff111
-    1111111fffffdddddddddddfffffddddddffffdddddddffffddddddffff1111111111111111111ffffffffffffffff111111111111111111111111111111111111111111111111111111111111111111
-    1111111fffffdddddddddddfffffddddddffffddddddffff.ddddddffff1111111111111111111ffffffffffffffff11111111111111111111f111111111111111111111111111111111111111111111
-    1111111fffff..dddddddddfffffddddddffffddddddffff..dddddffff1111111111111111111ffffffffffffffff111111111111111111111111111111111111111111111111111111111111111111
-    1111111fffff..dddddddddfffffddddddffffdddddfffff......fffff1111111111111111111ffffffffffffffff111111111111111111111111111111111111111111111111111111111111111111
-    1111111fffff..dddddddddfffff111111111111dddfffff......fffff111111111111111111fffffffffffffffff111111111111111111111111111111111111111111111111111111111111111111
-    11111111111...dddddddd.ff11111111111111111111fff......fffff111111111111111111fffffffffffffffff111111111111111111111111111111111111111111111111111111111111111111
-    11111111111111111111111111111111111111111111111111111111111111111111111111111fffffffffffffffff111111111111111111111111111111111111111111111111111111111111111111
-    11111111111111111111111111111111111111111111111111111111111111111111111111111fff11111fffffffff111111111111111111111111111111111111111111111111111111111111111111
+    1111111fffffddddddfffffff.ddddd.fffffffdddddfffddddd.ffff1111111111111111111111111111111111111111111111111111111111ffdddddddfffddddddfffdddddffffff.dddddfffff11
+    1111111fffffddddd..ffffff.ddddd..ffffffddddddffddddd.ffff1111111111111111111111111111111111111111111111111111111111ffdddddddfffddddddfffddddddfffff.dddddfffff11
+    1111111fffffddddd..fffffffdddddd.ffffffddddddffddddd.ffff1111111111111111111111111111111111111111111111111111111111ffdddddddfffdddddffffddddddfffff.dddddfffff11
+    1111111ffff.ddddddddddffffddddddd.fffffddddddffddddddffff1111111111111111111111111111111111111111111111111111111111ffddddddffffdddddffffddddddfffff.dddddfffff11
+    1111111ffffdddddddddddffffddddddd.fffffddddddffddddddffff1111111111111111111111111111111111111111111111111111111111fdddddddffffdddddffffddddddfffff.dddddfffff11
+    1111111ffffdddddddddddffffddddddd.fffffddddddffddddddffff1111111111111111111111111111111111111111111111111111111111fddddddfffffddddddffffdddddfffff.dddddffff111
+    .111111ffffdddddddddddffffddddddd.ffffffdddddffddddddffff1111111111111111111111111111111111111111111111111111111111fddddddfffffddddddffffdddddfffff.dddddffff111
+    1111111ffffdddddddddddfffffdddddd.ffffffdddddffdddddddfff111111111111111111111111111111111111111111111111111111111ffddddddfffffddddddffffdddddfffff.ddddddfff111
+    1111111ffffdddddddddddffffffddddd.fffffddddddfffddddddfff111111111111111111111111111111111111111111111111111111111ffddddddfffffddddddffffdddddfffff.ddddddfff111
+    1111111ffffddddddddddfffffffddddd.fffffddddddfffdddddddfff11111111111111111111111111111111111111111111111111111111ffddddd.ffffffdddddffffdddddfffff.ddddddfff111
+    1111111ffffddddddddddddfffffddddddffffdddddddfffdddddddfff11111111111111111111111111111111111111111111111111111111f1111d11ffffff...1.fffff....ff11111dddddfff111
+    1111111ffffddddddddddddfffffddddddffffdddddddffffddddddfff11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111dfff111
+    1111111fffffdddddddddddfffffddddddffffdddddddffffddddddffff11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    1111111fffffdddddddddddfffffddddddffffddddddffff.ddddddffff1111111111111111111111111111111111111111111111111111111f111111111111111111111111111111111111111111111
+    1111111fffff..dddddddddfffffddddddffffddddddffff..dddddffff11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    1111111fffff..dddddddddfffffddddddffffdddddfffff......fffff11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    1111111fffff..dddddddddfffff111111111111dddfffff......fffff11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    11111111111...dddddddd.ff11111111111111111111fff......fffff11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
     1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
     11111111111111111111111111111111..ff1111111111111111111111111111111111111111111111.11111111111111111111111..1111111111111111111111111111111111111111111111111111
     `)
