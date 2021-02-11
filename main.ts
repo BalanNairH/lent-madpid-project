@@ -21,7 +21,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . 6 6 6 6 . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, gun, 100, 0)
-    pause(200)
+    pause(100)
 })
 let bullets: Sprite = null
 let gun: Sprite = null
@@ -147,7 +147,7 @@ scene.setBackgroundImage(img`
     1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
     11111111111111111111111111111111..ff1111111111111111111111111111111111111111111111.11111111111111111111111..1111111111111111111111111111111111111111111111111111
     `)
-info.setLife(3)
+info.setLife(5)
 let DOOR = sprites.create(img`
     ffffffffffffff..................
     ffffffffffffff..................
@@ -259,7 +259,7 @@ let Trump_dispenser = sprites.create(img`
 Trump_dispenser.setPosition(82, 0)
 info.setScore(0)
 forever(function () {
-    pause(randint(500, 2000))
+    pause(randint(1000, 2000))
     Trump = sprites.createProjectileFromSprite(img`
         2 2 2 . . . . . . . . . 2 2 2 2 
         2 2 2 5 5 5 5 5 5 5 . 2 2 2 2 2 
@@ -287,8 +287,8 @@ forever(function () {
         bullets.destroy(effects.spray, 100)
     }
     if (Trump.overlapsWith(DOOR)) {
-        music.wawawawaa.play()
-        Trump.destroy(effects.disintegrate, 100)
+        music.pewPew.play()
+        Trump.destroy(effects.rings, 100)
         info.changeLifeBy(-1)
     }
 })
